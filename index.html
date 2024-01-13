@@ -2,38 +2,44 @@
     <head>
         <title>odin-calculator</title>
         <meta charset = "utf-8">
+        <link rel = stylesheet href = style.css> 
     </head>
     <body>
         <header>Odin Calculator</header>
-        <div class = calculator-body>
-            <div class = calculator-screen></div>
-            <div class = calculator-buttons>
-                <div class = "buttoncol col1"></div>
-                    <button class = "option number">7</button>
-                    <button class = "option number">4</button>
-                    <button class = "option number">1</button>
-                    <button class = "option operation clear">C</button>
-                <div class = "buttoncol col2">
-                    <button class = "option number">8</button>
-                    <button class = "option number">5</button>
-                    <button class = "option number">2</button>
-                    <button class = "option operation equals">=</button>
+        <div class = main-content>
+            <div class = calculator-body>
+                <div class = calculator-screen>
+                    <span class = history></span>
+                    <span class = current-arguements></span>
                 </div>
-                <div class = "buttoncol col3">
-                    <button class = "option number">9</button>
-                    <button class = "option number">6</button>
-                    <button class = "option number">3</button>
-                    <button class = "option number">0</button>
-                </div>
-                <div class = "buttoncol col4">
-                    <button class = "option operation add">+</button>
-                    <button class = "option operation subtract">-</button>
-                    <button class = "option operation multiply">x</button>
-                    <button class = "option operation divide">/</button>
+                <div class = calculator-buttons>
+                    <div class = "buttoncol col1">
+                        <button class = "option number">7</button>
+                        <button class = "option number">4</button>
+                        <button class = "option number">1</button>
+                        <button class = "option number">0</button>
+                    </div>
+                    <div class = "buttoncol col2">
+                        <button class = "option number">8</button>
+                        <button class = "option number">5</button>
+                        <button class = "option number">2</button>
+                        <button class = "option operation clear">C</button>
+                    </div>
+                    <div class = "buttoncol col3">
+                        <button class = "option number">9</button>
+                        <button class = "option number">6</button>
+                        <button class = "option number">3</button>
+                        <button class = "option operation equals">=</button>
+                    </div>
+                    <div class = "buttoncol col4">
+                        <button class = "option operation add">+</button>
+                        <button class = "option operation subtract">-</button>
+                        <button class = "option operation multiply">x</button>
+                        <button class = "option operation divide">/</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <footer>Made for theodinproject.com</footer>
     </body>
 </html>
 
