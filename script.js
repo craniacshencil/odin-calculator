@@ -7,7 +7,9 @@ const numberButtons= Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(button => button.addEventListener("click", getNumber)); 
 
 function getNumber(){
-    if(currentArgument.textContent.includes("Invalid") || history.textContent.includes("="))
+    currentArgTC = currentArgument.textContent;
+    historyTC = history.textContent;
+    if(currentArgTC.includes("Invalid") || historyTC.includes("="))
         return ;
     currentArgument.textContent += this.value;
 }
@@ -26,14 +28,16 @@ const equalsButton = document.querySelector(".equals");
 equalsButton.addEventListener("click", performEquals);
 
 function performEquals(){
+    let currentArgTC = currentArgument.textContent;
+    let historyTC = history.textContent;
 //to bring expression in format: "op1 operator op2" i.e (uniform spacing)
-    const expression = `${history.textContent}${currentArgument.textContent}`;
+    const expression = `${historyTC}${currentArgTC}`;
 //returns nothing if history contains "=" and when the expression is in the form "21 + " or the screen is empty
-    if((history.textContent.includes("=")) || (currentArgument.textContent == "") || (currentArgument.textContent.includes("Invalid")) )
+    if((historyTC.includes("=")) || (currentArgTC == "") || (currentArgTC.includes("Invalid")))
         return ;
     
     else{
-        history.textContent += `${currentArgument.textContent} ${this.textContent}`; 
+        history.textContent += `${currentArgTC} ${this.textContent}`; 
         currentArgument.textContent = operate(expression);
     }
 }
@@ -44,26 +48,35 @@ let previousOperation = "";
 operationButtons.map(button => button.addEventListener("click", performOperation));
 
 function performOperation(){
-    historyText = history.textContent
-    historyHasOperatorAlready = historyText.includes("x") || historyText.includes("/") || historyText.includes("+") || historyText.includes("-");
-    if((history.textContent == "" && currentArgument.textContent == "")|| currentArgument.textContent.includes("Invalid"))    
+    let currentArgTC = currentArgument.textContent;
+    let historyTC = history.textContent;
+    historyHasOperatorAlready = historyTC.includes("x") || historyTC.includes("/") || historyTC.includes("+") || historyTC.includes("-");
+    if((historyTC == "" && currentArgTC == "")|| currentArgTC.includes("Invalid"))    
         return ;
-    else if(history.textContent.includes("=")){
-        history.textContent = `${currentArgument.textContent} ${this.textContent} `;
+    else if(historyTC.includes("=")){
+        history.textContent = `${currentArgTC} ${this.textContent} `;
         currentArgument.textContent = "";
     }
-    else if(historyHasOperatorAlready && currentArgument.textContent == ""){
-        operationIndex = history.textContent.indexOf(previousOperation);
-        history.textContent = history.textContent.slice(0, operationIndex) + this.textContent + " ";
+    else if(historyHasOperatorAlready && currentArgTC == ""){
+        operationIndex = historyTC.indexOf(previousOperation);
+        history.textContent = historyTC.slice(0, operationIndex) + this.textContent + " ";
     }
-    else if(historyHasOperatorAlready && currentArgument.textContent != ""){
-        const expression = `${history.textContent}${currentArgument.textContent}`;
-        history.textContent = `${operate(expression)} ${this.textContent} `;
-        currentArgument.textContent = "";
+    else if(historyHasOperatorAlready && currentArgTC != ""){
+        const expression = `${historyTC}${currentArgTC}`;
+        const evaluation = operate(expression);
+        console.log(typeof evaluation);
+        if(evaluation == "Invalid expression. Press C"){
+            history.textContent = "";
+            currentArgument.textContent = "Invalid expression. Press C";
+        }
+        else{
+            history.textContent = `${evaluation} ${this.textContent} `;
+            currentArgument.textContent = evaluation; 
+        }
     }
 
     else{
-    history.textContent += `${currentArgument.textContent} ${this.textContent} `; 
+    history.textContent += `${currentArgTC} ${this.textContent} `; 
     currentArgument.textContent = "";
     }
     previousOperation = this.textContent;
@@ -74,7 +87,9 @@ const decimalPointButton = document.querySelector(".point");
 decimalPointButton.addEventListener("click", getDecimalPoint);
 
 function getDecimalPoint(){
-    if(currentArgument.textContent.includes("Invalid") || history.textContent.includes("=") || (currentArgument.textContent.includes(".")))
+    let currentArgTC = currentArgument.textContent;
+    let historyTC = history.textContent;
+    if(currentArgTC.includes("Invalid") || historyTC.includes("=") || (currentArgTC.includes(".")))
         return ;
     currentArgument.textContent += this.textContent;
 }
@@ -84,9 +99,9 @@ const deleteCharButton = document.querySelector(".delete");
 deleteCharButton.addEventListener("click", performDeleteCharacter);
 
 function performDeleteCharacter(){
-    currentArgTC = currentArgument.textContent;
-    historyTC = history.textContent;
-    if(currentArgTC == "" || historyTC.includes("="))
+    let currentArgTC = currentArgument.textContent;
+    let historyTC = history.textContent;
+    if(currentArgTC == "" || historyTC.includes("=") || currentArgTC.includes("Invalid"))
         return ;
     else{
         currentArgument.textContent = currentArgTC.slice(0, -1);
