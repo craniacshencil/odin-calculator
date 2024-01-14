@@ -69,6 +69,15 @@ function performOperation(){
     previousOperation = this.textContent;
 }
 
+//decimal point functionality
+const decimalPoint = document.querySelector(".point");
+decimalPoint.addEventListener("click", getDecimalPoint);
+
+function getDecimalPoint(){
+    if(currentArgument.textContent.includes("Invalid") || history.textContent.includes("=") || (currentArgument.textContent.includes(".")))
+        return ;
+    currentArgument.textContent += this.textContent;
+}
 //operate function
 function operate(expression){
     let result;

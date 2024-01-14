@@ -26,8 +26,8 @@ header{
     align-items: center;
 }
 .calculator-body{
-    height: 400px;
-    width: 300px;
+    width: 350px;
+    height: 495px;
 }
 
 .calculator-screen{
@@ -43,18 +43,20 @@ header{
     align-items: center;
     height: 80%; 
     width: 100%;
+    padding: 3px;
 }
+
 
 .buttoncol{
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     height: 100%;
 }
 
 .option{
-    height: 25%;
+    height: 33%;
 }
 
 .history{
