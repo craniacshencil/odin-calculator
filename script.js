@@ -70,13 +70,27 @@ function performOperation(){
 }
 
 //decimal point functionality
-const decimalPoint = document.querySelector(".point");
-decimalPoint.addEventListener("click", getDecimalPoint);
+const decimalPointButton = document.querySelector(".point");
+decimalPointButton.addEventListener("click", getDecimalPoint);
 
 function getDecimalPoint(){
     if(currentArgument.textContent.includes("Invalid") || history.textContent.includes("=") || (currentArgument.textContent.includes(".")))
         return ;
     currentArgument.textContent += this.textContent;
+}
+
+//delete character functionality
+const deleteCharButton = document.querySelector(".delete");
+deleteCharButton.addEventListener("click", performDeleteCharacter);
+
+function performDeleteCharacter(){
+    currentArgTC = currentArgument.textContent;
+    historyTC = history.textContent;
+    if(currentArgTC == "" || historyTC.includes("="))
+        return ;
+    else{
+        currentArgument.textContent = currentArgTC.slice(0, -1);
+    }
 }
 //operate function
 function operate(expression){
