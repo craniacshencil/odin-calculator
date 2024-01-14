@@ -7,7 +7,7 @@ const numberButtons= Array.from(document.querySelectorAll(".number"));
 numberButtons.forEach(button => button.addEventListener("click", getNumber)); 
 
 function getNumber(){
-    if(currentArgument.textContent.includes("Invalid"))
+    if(currentArgument.textContent.includes("Invalid") || history.textContent.includes("="))
         return ;
     currentArgument.textContent += this.value;
 }
@@ -71,14 +71,20 @@ function performOperation(){
 
 //operate function
 function operate(expression){
+    let result;
     [operand1, operator, operand2] = expression.split(" ");
     operand1 = +operand1;
     operand2 = +operand2;
     switch(operator){
-        case '+': return operand1 + operand2;
-        case '-': return operand1 - operand2;
-        case 'x': return operand1 * operand2;
-        case '/': return (operand2 == 0)? "Invalid expression. Press C" : operand1 / operand2;
+        case '+': result = operand1 + operand2;break;
+        case '-': result = operand1 - operand2;break;
+        case 'x': result = operand1 * operand2;break;
+        case '/': result = (operand2 == 0)? "Invalid expression. Press C" : operand1 / operand2;break;
     }
+//Rounding float to 3 digits and keeping integers unchanged
+    if(Math.round(result) == result || result.toString().includes("Invalid"))
+        return result;
+    else if(Math.round(result) != result)
+        return result.toFixed(3);
 }
 
